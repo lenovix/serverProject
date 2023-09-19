@@ -33,7 +33,7 @@ app.post("/login", (req, res) => {
     }
 
     const user = results[0];
-    console.log("berhasil login");
+    console.log("Login Success");
     return res.status(200).json({ message: "Login successful", user });
   });
 });
@@ -80,17 +80,17 @@ app.get("/users", (req, res) => {
   });
 });
 
-app.delete("/users/:id", (req, res) => {
-  const userId = req.params.id;
-  connection.query(
-    "DELETE FROM users WHERE id = ?",
-    [userId],
-    (error, results) => {
-      if (error) throw error;
-      res.send("Pengguna telah dihapus");
-    }
-  );
-});
+// app.delete("/users/:id", (req, res) => {
+//   const userId = req.params.id;
+//   connection.query(
+//     "DELETE FROM users WHERE id = ?",
+//     [userId],
+//     (error, results) => {
+//       if (error) throw error;
+//       res.send("Pengguna telah dihapus");
+//     }
+//   );
+// });
 
 // for Emergency unit
 app.post("/loginEU", (req, res) => {
@@ -174,10 +174,10 @@ app.put("/calls/:report_id", (req, res) => {
   const query = `UPDATE request_unit SET status = ? WHERE report_id = ?`;
   connection.query(query, [newStatus, reportId], (error, results) => {
     if (error) {
-      res.status(500).json({ error: "Gagal memperbarui status panggilan" });
+      res.status(500).json({ error: "fail to update status" });
     } else {
       res.status(200).json({
-        message: "Status panggilan berhasil diperbarui ",
+        message: "update status success",
         reportId,
         newStatus,
       });
